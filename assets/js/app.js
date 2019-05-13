@@ -20,6 +20,40 @@ sendBtn.addEventListener('click', function() {
     return;
   }
 
+  // メッセージ用のdivを作成する
+  let messageBox = createMessageBox();
+
+  // メッセージ用のpを作成する
+  let message = createMessage(messageText);
+
+  // divにpタグを追加する
+  messageBox.appendChild(message);
+
+  // チャット画面である、divタグを取得する
+  let room = document.getElementById('room');
+
+  // チャット画面のdivに新規メッセージのdivを追加する
+  room.appendChild(messageBox);
+
+  // 入力欄の入力値をリセットする
+  inputMessage.value = '';
+
+  // // 送信者を変更する
+  // if (isMySelf) {
+  //   // 自分が送信者の場合
+  //   // 次の送信者を相手にする
+  //   isMySelf = false;
+  // } else {
+  //   // 相手が送信者の場合
+  //   // 次の送信者を自分にする
+  //   isMySelf = true;
+  // }
+
+  isMySelf = !isMySelf;
+})
+
+// メッセージ用のdivを作成する
+function createMessageBox() {
   // divを作成
   let messageBox = document.createElement('div');
 
@@ -34,6 +68,11 @@ sendBtn.addEventListener('click', function() {
     messageBox.classList.add('box-left');
   }
 
+  return messageBox;
+}
+
+// メッセージ用のpを作成する
+function createMessage(messageText) {
   // pタグを作成
   let message = document.createElement('p');
 
@@ -53,26 +92,5 @@ sendBtn.addEventListener('click', function() {
     message.classList.add('white');
   }
 
-  // divにpタグを追加する
-  messageBox.appendChild(message);
-
-  // チャット画面である、divタグを取得する
-  let room = document.getElementById('room');
-
-  // チャット画面のdivに新規メッセージのdivを追加する
-  room.appendChild(messageBox);
-
-  // 入力欄の入力値をリセットする
-  inputMessage.value = '';
-
-  // 送信者を変更する
-  if (isMySelf) {
-    // 自分が送信者の場合
-    // 次の送信者を相手にする
-    isMySelf = false;
-  } else {
-    // 相手が送信者の場合
-    // 次の送信者を自分にする
-    isMySelf = true;
-  }
-})
+  return message;
+}
